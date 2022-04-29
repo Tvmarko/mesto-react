@@ -2,13 +2,14 @@ import React from 'react';
 import api from '../utils/api.js';
 import Card from "./Card.js";
 
-const [userName, setUserName] = React.useState('');
-const [userDescription, setUserDescription] = React.useState(''); 
-const [userAvatar, setUserAvatar] = React.useState('');
-const [cards, setCards] = React.useState([]);
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
+  const [userName, setUserName] = React.useState('');
+  const [userDescription, setUserDescription] = React.useState(''); 
+  const [userAvatar, setUserAvatar] = React.useState('');
+  const [cards, setCards] = React.useState([]);
 
-React.useEffect(() => {
-  Promise.all([api.getUserInfo(), api.getCards()])
+  React.useEffect(() => {
+    Promise.all([api.getProfileInfo(), api.getInitialCards()])
     .then(([userName, userDescription, userAvatar, cards]) => {
       setUserName(userName);
       setUserDescription(userDescription);
@@ -20,7 +21,6 @@ React.useEffect(() => {
     });
 }, []);
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   return (
     <main className="content">
       <section className="profile">

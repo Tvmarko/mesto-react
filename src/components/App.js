@@ -54,11 +54,11 @@ function App() {
         onClose={closeAllPopups}
       >          
         <div className="popup__form-field">
-          <input className="popup__input popup__input_name" id="name" type="text" name="name" placeholder="Ваше имя" required minlength="2" maxlength="40"/>
+          <input className="popup__input popup__input_name" id="name" type="text" name="name" placeholder="Ваше имя" required minLength="2" maxLength="40"/>
           <span className="popup__input-error name-error"></span>
         </div>
         <div className="popup__form-field"> 
-          <input className="popup__input popup__input_about" id="about" type="text" name="profession" placeholder="Ваш род деятельности" required minlength="2" maxlength="200"/>
+          <input className="popup__input popup__input_about" id="about" type="text" name="profession" placeholder="Ваш род деятельности" required minLength="2" maxLength="200"/>
           <span className="popup__input-error about-error"></span>
         </div>
       </PopupWithForm>
@@ -84,7 +84,7 @@ function App() {
         onClose={closeAllPopups}
       >          
         <div className="popup__form-field"> 
-          <input className="popup__input popup__input_place" id="place" type="text" name="place" placeholder="Название" required minlength="2" maxlength="30"/>
+          <input className="popup__input popup__input_place" id="place" type="text" name="place" placeholder="Название" required minLength="2" maxLength="30"/>
           <span className="popup__input-error place-error"></span>
         </div>
         <div className="popup__form-field">
