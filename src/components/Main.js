@@ -1,5 +1,5 @@
 import React from 'react';
-import api from '../utils/api.js';
+import api from "../utils/api.js";
 import Card from "./Card.js";
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
@@ -10,10 +10,10 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
 
   React.useEffect(() => {
     Promise.all([api.getProfileInfo(), api.getInitialCards()])
-    .then(([userName, userDescription, userAvatar, cards]) => {
-      setUserName(userName);
-      setUserDescription(userDescription);
-      setUserAvatar(userAvatar);
+    .then(([user, cards]) => {
+      setUserName(user.name);
+      setUserDescription(user.about);
+      setUserAvatar(user.avatar);
       setCards(cards);
     })
     .catch((err) => {
