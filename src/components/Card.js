@@ -1,9 +1,26 @@
-import React from 'react';
-import deletebutton from '../images/delete-button.svg';
+import React from "react";
+import {CurrentUserContext} from "../contexts/CurrentUserContext.js";
+import deletebutton from "../images/delete-button.svg";
 
-function Card({ card, onCardClick }) {
+function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+    const currentUser = React.useContext(CurrentUserContext);
+
+    const isOwn = card.owner._id === currentUser._id;
+    const cardDeleteButtonClassName = `elements__element-delete ${isOwn ? "elements__element-delete_active" : ''}`; 
+
+    const isLiked = card.likes.some(user => user._id === currentUser._id);
+    const cardLikeButtonClassName = `elements__element-like ${isLiked ? "elements__element-like_active": ''}`;
+
     function handleClick() {
         onCardClick(card);
+      }
+
+    function handleLikeClick() {
+        onCardLike(card);
+      }
+
+      function handleDeleteClick() {
+        onCardDelete(card);
       }
 
     return (
@@ -15,7 +32,10 @@ function Card({ card, onCardClick }) {
                     alt={`${card.name}`}
                     onClick={handleClick}
                 />
-                <button className="elements__element-delete" type="button">
+                <button 
+                    className={cardDeleteButtonClassName}
+                    onClick={handleDeleteClick}
+                    type="button">
                     <img src={deletebutton} alt="Delete"/>
                 </button>
             </div>
@@ -23,7 +43,8 @@ function Card({ card, onCardClick }) {
                 <h3 className="elements__element-title">{card.name}</h3>
                 <div className="elements__element-like-container">
                     <button 
-                        className="elements__element-like" 
+                        className={cardLikeButtonClassName}
+                        onClick={handleLikeClick}
                         type="button" 
                         aria-label="Like">
                     </button>
