@@ -29,7 +29,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
                 <img 
                     className="elements__element-photo" 
                     src={`${card.link}`} 
-                    alt={`${card.name}`}
+                    alt={card.name}
                     onClick={handleClick}
                 />
                 <button 

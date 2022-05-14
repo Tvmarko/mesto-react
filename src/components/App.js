@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../index.css";
 import Header from "./Header.js";
 import Main from "./Main.js";
@@ -11,14 +11,14 @@ import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function App() {
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({});
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([]);
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
       
-  React.useEffect(() => {
+  useEffect(() => {
     Promise.all([api.getProfileInfo(), api.getInitialCards()])
     .then(([userData, cards]) => {
       setCurrentUser(userData);
@@ -83,7 +83,7 @@ function App() {
   function handleCardDelete(card) {
     api.deleteCard(card)
     .then(() => {
-      setCards(cards.filter((c) => c._id !== card._id));
+      setCards((cards) => cards.filter((c) => c._id !== card._id));
     })
       .catch((err) => {
         console.log(err);
